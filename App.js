@@ -3,18 +3,11 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
+import HomeScreen from "./Components/Screen/HomeScreen";
 
 const Stack = createStackNavigator();
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <NavigationContainer>
@@ -26,11 +19,4 @@ export default class App extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f3f3f3',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
