@@ -1,14 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 
-class HomeScreen extends React.Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>Home Screen</Text>
-            </View>
-        );
-    }
+function HomeScreen({ navigation }) {
+    return (
+        <View style={styles.container}>
+            <Text>Home Screen</Text>
+            <Button
+                title="Go to Idea"
+                onPress={() => navigation.navigate('Idea')}
+            />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
