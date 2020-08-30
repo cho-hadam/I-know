@@ -54,8 +54,8 @@ class WriteScreen extends React.Component {
                                 value={title}
                                 onChangeText={this._controlInputTitle}
                                 returnKeyType={"done"}
-                                placeholder="제목"
-                                placeholderTextColor="#999"
+                                placeholder={"제목"}
+                                placeholderTextColor={"#999"}
                             />
                         </View>
                         <TouchableWithoutFeedback
@@ -70,8 +70,8 @@ class WriteScreen extends React.Component {
                                 value={idea}
                                 onChangeText={this._controlInputIdea}
                                 multiline={true}
-                                placeholder="아이디어를 입력하세요."
-                                placeholderTextColor="#999"
+                                placeholder={"아이디어를 입력하세요."}
+                                placeholderTextColor={"#999"}
                             />
                         </TouchableWithoutFeedback>
                     </View>
