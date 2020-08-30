@@ -16,6 +16,7 @@ class HomeScreen extends React.Component {
             navigation: props.navigation,
             fontsLoaded: false,
             isOpeningMenu: false,
+            word: "바이러스"
         };
     }
 
@@ -24,7 +25,7 @@ class HomeScreen extends React.Component {
     }
 
     render() {
-        const { navigation, isOpeningMenu } = this.state;
+        const { navigation, isOpeningMenu, word } = this.state;
 
         if (this.state.fontsLoaded) {
             return (
@@ -52,7 +53,7 @@ class HomeScreen extends React.Component {
                             <TouchableOpacity onPress={() => navigation.push('Write')}>
                                 <Text style={[styles.textMenu, {marginBottom: 60}]}>글쓰기</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => navigation.push('Idea', {post: "post text"})}>
+                            <TouchableOpacity onPress={() => navigation.push('Idea', {word: word})}>
                                 <Text style={[styles.textMenu, {marginBottom: 60}]}>아이디어</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => navigation.push('Word')}>
@@ -60,7 +61,7 @@ class HomeScreen extends React.Component {
                             </TouchableOpacity>
                             </>
                         ) : (
-                            <Text style={styles.textWord}>바이러스</Text>
+                            <Text style={styles.textWord}>{word}</Text>
                         )}
                     </View>
                 </SafeAreaView>
