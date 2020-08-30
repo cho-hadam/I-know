@@ -1,6 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { 
+    View, 
+    Text, 
+    StyleSheet, 
+    TouchableOpacity, 
+    TextInput,
+    KeyboardAvoidingView,
+    Keyboard
+} from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 class WriteScreen extends React.Component {
     constructor(props) {
@@ -18,46 +27,62 @@ class WriteScreen extends React.Component {
         const { word } = this.props.route.params;
 
         return (
-            <SafeAreaView style={styles.container}>
-                <View style={styles.header}>
-                    <TouchableOpacity onPress={this._cancelWrite}>
-                        <Text style={[styles.text, {color: "#999"}]}>취소</Text>
-                    </TouchableOpacity>
-                    <Text style={styles.text}>{word}</Text>
-                    <TouchableOpacity onPress={this._cancelWrite}>
-                        <Text style={[styles.text, {color: "#666"}]}>완료</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styles.content}>
-                    <View style={styles.inputTitleContainer}>
-                        <Text style={styles.text}>#</Text>
-                        <TextInput 
-                            style={[
-                                styles.text,
-                                styles.input
-                            ]}
-                            value={title}
-                            onChangeText={this._controlInputTitle}
-                            returnKeyType={"done"}
-                            placeholder="제목"
-                            placeholderTextColor="#999"
-                        />
+            <SafeAreaView style={{ flex:1 }}>
+                <KeyboardAvoidingView
+                    behavior={Platform.OS == "ios" ? "padding" : "height"}
+                    style={styles.container}
+                    enabled
+                >
+                    <View style={styles.header}>
+                        <TouchableOpacity onPress={this._cancelWrite}>
+                            <Text style={[styles.text, {color: "#999"}]}>취소</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.text}>{word}</Text>
+                        <TouchableOpacity onPress={this._completeWrite}>
+                            <Text style={[styles.text, {color: "#666"}]}>완료</Text>
+                        </TouchableOpacity>
                     </View>
-                    <TextInput 
-                        style={[
-                            styles.text,
-                            {marginTop: 35}
-                        ]}
-                        value={idea}
-                        onChangeText={this._controlInputIdea}
-                        multiline={true}
-                        placeholder="아이디어를 입력하세요."
-                        placeholderTextColor="#999"
-                    />
-                </View>
+
+                    <View style={styles.content}>
+                        <View style={styles.inputTitleContainer}>
+                            <Text style={styles.text}>#</Text>
+                            <TextInput 
+                                style={[
+                                    styles.text,
+                                    styles.input
+                                ]}
+                                value={title}
+                                onChangeText={this._controlInputTitle}
+                                returnKeyType={"done"}
+                                placeholder="제목"
+                                placeholderTextColor="#999"
+                            />
+                        </View>
+                        <TouchableWithoutFeedback
+                            onPress={() => Keyboard.dismiss()}
+                        >
+                            <TextInput 
+                                style={[
+                                    styles.text,
+                                    {marginTop: 35,
+                                    paddingBottom: 20}
+                                ]}
+                                value={idea}
+                                onChangeText={this._controlInputIdea}
+                                multiline={true}
+                                placeholder="아이디어를 입력하세요."
+                                placeholderTextColor="#999"
+                            />
+                        </TouchableWithoutFeedback>
+                    </View>
+                </KeyboardAvoidingView>
             </SafeAreaView>
         );
+    }
+
+    _cancelWrite = () => {
+        const { navigation } = this.state;
+        navigation.goBack();
     }
 
     _controlInputTitle = (text) => {
