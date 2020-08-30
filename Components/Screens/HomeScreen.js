@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 class HomeScreen extends React.Component {
     render() {
         const { navigation } = this.props;
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <Text>Home Screen</Text>
                 <Button
                     title="Go to Idea"
@@ -15,7 +16,7 @@ class HomeScreen extends React.Component {
                         })
                     }}
                 />
-            </View>
+            </SafeAreaView>
         );
     }
 }

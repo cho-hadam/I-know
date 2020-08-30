@@ -13,7 +13,7 @@ class App extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Home" headerMode="none">
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Idea" component={IdeaScreen} />
         </Stack.Navigator>

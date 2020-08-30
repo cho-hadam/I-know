@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 class IdeaScreen extends React.Component {
     render() {
         const { navigation } = this.props;
         const { post } = this.props.route.params;
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <Text>Idea Screen</Text>
                 <Text>{post}</Text>
                 <Button
@@ -25,7 +26,7 @@ class IdeaScreen extends React.Component {
                     title="Go back to first screen in stack"
                     onPress={() => navigation.popToTop()}
                 />
-            </View>
+            </SafeAreaView>
         );
     }
 }
