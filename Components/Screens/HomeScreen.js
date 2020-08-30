@@ -50,7 +50,7 @@ class HomeScreen extends React.Component {
                     <View style={styles.content}>
                         {isOpeningMenu ? (
                             <>
-                            <TouchableOpacity onPress={() => navigation.push('Write')}>
+                            <TouchableOpacity onPress={() => navigation.push('Write', {word: word})}>
                                 <Text style={[styles.textMenu, {marginBottom: 60}]}>글쓰기</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => navigation.push('Idea', {word: word})}>
