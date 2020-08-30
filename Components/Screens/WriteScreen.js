@@ -6,7 +6,8 @@ import {
     TouchableOpacity, 
     TextInput,
     KeyboardAvoidingView,
-    Keyboard
+    Keyboard,
+    Alert
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
@@ -82,7 +83,21 @@ class WriteScreen extends React.Component {
 
     _cancelWrite = () => {
         const { navigation } = this.state;
-        navigation.goBack();
+        Alert.alert(
+            '취소',
+            '정말 글쓰기를 취소하시겠습니까?',
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => {},
+                    style: "cancel"
+                },
+                {
+                    text: "OK",
+                    onPress: () => navigation.goBack()
+                }
+            ]
+        )
     }
 
     _controlInputTitle = (text) => {
