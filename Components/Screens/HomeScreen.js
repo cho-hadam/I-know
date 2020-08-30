@@ -13,7 +13,8 @@ class HomeScreen extends React.Component {
         super(props);
         this.state = {
             navigation: props.navigation,
-            fontsLoaded: false
+            fontsLoaded: false,
+            isOpeningMenu: false,
         };
     }
 
@@ -22,21 +23,44 @@ class HomeScreen extends React.Component {
     }
 
     render() {
-        const { navigation } = this.state;
+        const { navigation, isOpeningMenu } = this.state;
 
         if (this.state.fontsLoaded) {
             return (
                 <SafeAreaView style={styles.container}>
                     <View style={styles.header}>
-                        <TouchableOpacity onPress={this._openMenu}>
-                            <Image
-                                style={styles.btnMenu}
-                                source={require('../../assets/icon/menu.png')}
-                            />
-                        </TouchableOpacity>
+                        {isOpeningMenu ? (
+                            <TouchableOpacity onPress={this._closeMenu}>
+                                <Image
+                                    style={styles.btnMenu}
+                                    source={require('../../assets/icon/close.png')}
+                                />
+                            </TouchableOpacity>
+                        ) : (
+                            <TouchableOpacity onPress={this._openMenu}>
+                                <Image
+                                    style={styles.btnMenu}
+                                    source={require('../../assets/icon/menu.png')}
+                                />
+                            </TouchableOpacity>
+                        )}
                     </View>
                     <View style={styles.content}>
-                        <Text style={styles.textWord}>바이러스</Text>
+                        {isOpeningMenu ? (
+                            <>
+                            <TouchableOpacity onPress={this._writeIdea}>
+                                <Text style={[styles.textMenu, {marginBottom: 60}]}>글쓰기</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this._showIdea}>
+                                <Text style={[styles.textMenu, {marginBottom: 60}]}>아이디어</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this._showWord}>
+                                <Text style={styles.textMenu}>단어</Text>
+                            </TouchableOpacity>
+                            </>
+                        ) : (
+                            <Text style={styles.textWord}>바이러스</Text>
+                        )}
                     </View>
                 </SafeAreaView>
             );
@@ -55,8 +79,16 @@ class HomeScreen extends React.Component {
 
     _openMenu = (event) => {
         event.stopPropagation();
-        const { navigation } = this.state;
-        navigation.navigate('MenuModal');
+        this.setState({
+            isOpeningMenu: true
+        });
+    }
+
+    _closeMenu = (event) => {
+        event.stopPropagation();
+        this.setState({
+            isOpeningMenu: false
+        });
     }
 }
 
@@ -86,6 +118,10 @@ const styles = StyleSheet.create({
     },
     textWord: {
         fontSize: 30,
+        fontFamily: 'Noto-Serif-KR'
+    },
+    textMenu: {
+        fontSize: 24,
         fontFamily: 'Noto-Serif-KR'
     }
 });

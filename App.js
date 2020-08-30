@@ -6,45 +6,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from "./Components/Screens/HomeScreen";
 import IdeaScreen from "./Components/Screens/IdeaScreen";
-import MenuModalScreen from './Components/Screens/MenuModalScreen';
 
-const MainStack = createStackNavigator();
-const RootStack = createStackNavigator();
-
-class MainStackScreen extends React.Component {
-  render() {
-    return (
-      <MainStack.Navigator headerMode="none">
-        <MainStack.Screen name="Home" component={HomeScreen} />
-        <MainStack.Screen name="Idea" component={IdeaScreen} />
-      </MainStack.Navigator>
-    );
-  }
-}
-
-class RootStackScreen extends React.Component {
-  render() {
-    return (
-      <RootStack.Navigator mode="modal">
-        <RootStack.Screen 
-          name="Main" component={MainStackScreen} 
-          options={{ headerShown: false }} 
-        />
-        <RootStack.Screen 
-          name="MenuModal" 
-          component={MenuModalScreen}
-          options={{ headerShown: false }}
-        />
-      </RootStack.Navigator>
-    );
-  }
-}
+const Stack = createStackNavigator();
 
 class App extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <RootStackScreen />
+        <Stack.Navigator headerMode="none">
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Idea" component={IdeaScreen} />
+        </Stack.Navigator>
       </NavigationContainer>
     );
   }
