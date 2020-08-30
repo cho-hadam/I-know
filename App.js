@@ -17,8 +17,8 @@ class App extends React.Component {
       <NavigationContainer>
         <Stack.Navigator headerMode="none">
           <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Write" component={WriteScreen} options={{ gestureEnabled: false }}/>
           <Stack.Screen name="Idea" component={IdeaScreen} />
-          <Stack.Screen name="Write" component={WriteScreen} />
           <Stack.Screen name="Word" component={WordScreen} />
         </Stack.Navigator>
       </NavigationContainer>
