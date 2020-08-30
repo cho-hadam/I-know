@@ -2,23 +2,15 @@ import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
-class HomeScreen extends React.Component {
+class MenuModalScreen extends React.Component {
     render() {
         const { navigation } = this.props;
         return (
             <SafeAreaView style={styles.container}>
-                <Text>Home Screen</Text>
+                <Text>Menu Screen</Text>
                 <Button
-                    title="Go to Idea"
-                    onPress={() => {
-                        navigation.navigate('Idea', {
-                            post: "Post Text"
-                        })
-                    }}
-                />
-                <Button
-                    title="Open Modal"
-                    onPress={() => navigation.navigate('MenuModal')}
+                    title="Dismiss"
+                    onPress={() => navigation.goBack('Idea')}
                 />
             </SafeAreaView>
         );
@@ -34,4 +26,4 @@ const styles = StyleSheet.create({
       },
 });
 
-export default HomeScreen;
+export default MenuModalScreen;
