@@ -4,9 +4,11 @@ import { View, Text, StyleSheet, Button } from "react-native";
 class IdeaScreen extends React.Component {
     render() {
         const { navigation } = this.props;
+        const { post } = this.props.route.params;
         return (
             <View style={styles.container}>
                 <Text>Idea Screen</Text>
+                <Text>{post}</Text>
                 <Button
                     title="Go to Idea... again"
                     onPress={() => navigation.push('Idea')}

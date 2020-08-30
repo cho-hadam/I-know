@@ -9,7 +9,11 @@ class HomeScreen extends React.Component {
                 <Text>Home Screen</Text>
                 <Button
                     title="Go to Idea"
-                    onPress={() => navigation.navigate('Idea')}
+                    onPress={() => {
+                        navigation.navigate('Idea', {
+                            post: "Post Text"
+                        })
+                    }}
                 />
             </View>
         );
