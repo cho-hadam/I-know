@@ -6,6 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from "./Components/Screens/HomeScreen";
 import IdeaScreen from "./Components/Screens/IdeaScreen";
+import WriteScreen from "./Components/Screens/WriteScreen";
+import WordScreen from "./Components/Screens/WordScreen";
 
 const Stack = createStackNavigator();
 
@@ -16,6 +18,8 @@ class App extends React.Component {
         <Stack.Navigator headerMode="none">
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Idea" component={IdeaScreen} />
+          <Stack.Screen name="Write" component={WriteScreen} />
+          <Stack.Screen name="Word" component={WordScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );
