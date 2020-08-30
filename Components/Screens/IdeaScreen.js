@@ -10,22 +10,6 @@ class IdeaScreen extends React.Component {
             <SafeAreaView style={styles.container}>
                 <Text>Idea Screen</Text>
                 <Text>{post}</Text>
-                <Button
-                    title="Go to Idea... again"
-                    onPress={() => navigation.push('Idea')}
-                />
-                <Button
-                    title="Go to Home"
-                    onPress={() => navigation.push('Home')}
-                />
-                <Button
-                    title="Go back"
-                    onPress={() => navigation.goBack()}
-                />
-                <Button
-                    title="Go back to first screen in stack"
-                    onPress={() => navigation.popToTop()}
-                />
             </SafeAreaView>
         );
     }
