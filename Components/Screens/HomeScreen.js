@@ -11,6 +11,7 @@ let customFonts = {
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             navigation: props.navigation,
             fontsLoaded: false,
@@ -72,7 +73,6 @@ class HomeScreen extends React.Component {
     async _loadFontsAsync() {
         await Font.loadAsync(customFonts);
         this.setState({
-            ...this.state,
             fontsLoaded: true
         })
     }
