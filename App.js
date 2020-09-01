@@ -1,8 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "./Components/Screens/HomeScreen";
 import IdeaScreen from "./Components/Screens/IdeaScreen";
@@ -17,7 +17,11 @@ class App extends React.Component {
       <NavigationContainer>
         <Stack.Navigator headerMode="none">
           <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Write" component={WriteScreen} options={{ gestureEnabled: false }}/>
+          <Stack.Screen
+            name="Write"
+            component={WriteScreen}
+            options={{ gestureEnabled: false }}
+          />
           <Stack.Screen name="Idea" component={IdeaScreen} />
           <Stack.Screen name="Word" component={WordScreen} />
         </Stack.Navigator>
