@@ -58,13 +58,17 @@ class HomeScreen extends React.Component {
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigation.push("Idea", { word: word })}
+                  onPress={() =>
+                    navigation.push("List", { listTitle: "아이디어" })
+                  }
                 >
                   <Text style={[styles.textMenu, { marginBottom: 60 }]}>
                     아이디어
                   </Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.push("Word")}>
+                <TouchableOpacity
+                  onPress={() => navigation.push("List", { listTitle: "단어" })}
+                >
                   <Text style={styles.textMenu}>단어</Text>
                 </TouchableOpacity>
               </>

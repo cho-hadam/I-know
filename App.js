@@ -5,9 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "./Components/Screens/HomeScreen";
-import IdeaScreen from "./Components/Screens/IdeaScreen";
 import WriteScreen from "./Components/Screens/WriteScreen";
-import WordScreen from "./Components/Screens/WordScreen";
+import ListScreen from "./Components/Screens/ListScreen";
 
 const Stack = createStackNavigator();
 
@@ -22,8 +21,7 @@ class App extends React.Component {
             component={WriteScreen}
             options={{ gestureEnabled: false }}
           />
-          <Stack.Screen name="Idea" component={IdeaScreen} />
-          <Stack.Screen name="Word" component={WordScreen} />
+          <Stack.Screen name="List" component={ListScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );
