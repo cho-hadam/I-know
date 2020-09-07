@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   Alert,
+  AsyncStorage,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
@@ -20,6 +21,7 @@ class WriteScreen extends React.Component {
       navigation: props.navigation,
       title: "",
       idea: "",
+      ideas: props.ideas,
     };
   }
 
@@ -97,6 +99,30 @@ class WriteScreen extends React.Component {
     this.setState({
       idea: text,
     });
+  };
+
+  _completeWrite = () => {
+    const { saveIdeas, word } = this.props.route.params;
+    const { navigation } = this.state;
+    const ID = Date.now();
+    const newIdeas = {
+      id: ID,
+      title: this.state.title,
+      idea: this.state.idea,
+      word: word,
+    };
+    this.setState((prevState) => {
+      const newState = {
+        ...prevState,
+        ideas: {
+          ...prevState.ideas,
+          ...newIdeas,
+        },
+      };
+      saveIdeas(newState.ideas);
+      return { ...newState };
+    });
+    navigation.push("Home");
   };
 }
 
