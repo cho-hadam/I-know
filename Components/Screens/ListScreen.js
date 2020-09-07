@@ -1,10 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Button, Dimensions } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import Idea from "../Idea";
+import { ScrollView } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("window");
 
-const WordList = (props) => {
+const Word = (props) => {
   return (
     <View style={{ marginBottom: 30 }}>
       <Text style={styles.text}>{props.word}</Text>
@@ -18,11 +20,13 @@ class IdeaScreen extends React.Component {
 
     this.state = {
       navigation: props.navigation,
+      words: ["바이러스", "교과서", "프로그래밍"],
+      ideas: props.route.params.ideas,
     };
   }
 
   render() {
-    const { navigation } = this.state;
+    const { navigation, words, ideas } = this.state;
     const { listTitle } = this.props.route.params;
     return (
       <SafeAreaView style={styles.container}>
@@ -30,11 +34,13 @@ class IdeaScreen extends React.Component {
           <Text style={styles.listTitleText}>{listTitle}</Text>
           <View style={styles.line} />
         </View>
-        <View style={styles.content}>
-          <WordList word="바이러스" />
-          <WordList word="교과서" />
-          <WordList word="프로그래밍" />
-        </View>
+        <ScrollView style={styles.content}>
+          {listTitle == "단어"
+            ? words.reverse().map((word) => <Word word={word} />)
+            : Object.values(ideas)
+                .reverse()
+                .map((idea) => <Idea key={idea.id} {...idea} />)}
+        </ScrollView>
       </SafeAreaView>
     );
   }
