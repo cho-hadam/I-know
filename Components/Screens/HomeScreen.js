@@ -15,19 +15,22 @@ class HomeScreen extends React.Component {
     this.state = {
       navigation: props.navigation,
       fontsLoaded: false,
+      ideasLoaded: false,
       isOpeningMenu: false,
       word: "바이러스",
+      ideas: {},
     };
   }
 
   componentDidMount() {
     this._loadFontsAsync();
+    this._loadIdeas();
   }
 
   render() {
     const { navigation, isOpeningMenu, word } = this.state;
 
-    if (this.state.fontsLoaded) {
+    if (this.state.fontsLoaded && this.state.ideasLoaded) {
       return (
         <SafeAreaView style={styles.container}>
           <View style={styles.header}>
@@ -88,6 +91,19 @@ class HomeScreen extends React.Component {
     this.setState({
       fontsLoaded: true,
     });
+  }
+
+  async _loadIdeas() {
+    try {
+      const ideas = await AsyncStorage.getItem("ideas");
+      const parsedIdeas = JSON.parse(ideas);
+      this.setState({
+        ideasLoaded: true,
+        ideas: parsedIdeas,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   _openMenu = (event) => {
