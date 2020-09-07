@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  AsyncStorage,
+} from "react-native";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -28,7 +35,7 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    const { navigation, isOpeningMenu, word } = this.state;
+    const { navigation, isOpeningMenu, word, ideas } = this.state;
 
     if (this.state.fontsLoaded && this.state.ideasLoaded) {
       return (
@@ -54,7 +61,13 @@ class HomeScreen extends React.Component {
             {isOpeningMenu ? (
               <>
                 <TouchableOpacity
-                  onPress={() => navigation.push("Write", { word: word })}
+                  onPress={() =>
+                    navigation.push("Write", {
+                      ideas: ideas,
+                      word: word,
+                      saveIdeas: this._saveIdeas,
+                    })
+                  }
                 >
                   <Text style={[styles.textMenu, { marginBottom: 60 }]}>
                     글쓰기
@@ -62,7 +75,10 @@ class HomeScreen extends React.Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.push("List", { listTitle: "아이디어" })
+                    navigation.push("List", {
+                      listTitle: "아이디어",
+                      ideas: ideas,
+                    })
                   }
                 >
                   <Text style={[styles.textMenu, { marginBottom: 60 }]}>
@@ -117,6 +133,20 @@ class HomeScreen extends React.Component {
     event.stopPropagation();
     this.setState({
       isOpeningMenu: false,
+    });
+  };
+
+  _saveIdeas = (newIdeas) => {
+    AsyncStorage.setItem("ideas", JSON.stringify(newIdeas));
+    this.setState((prevState) => {
+      const newState = {
+        ...prevState,
+        ideas: {
+          ...prevState.ideas,
+          ...newIdeas,
+        },
+      };
+      return { ...newState };
     });
   };
 }
