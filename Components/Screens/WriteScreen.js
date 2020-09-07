@@ -124,7 +124,7 @@ class WriteScreen extends React.Component {
       saveIdeas(newState.ideas);
       return { ...newState };
     });
-    navigation.push("Home");
+    navigation.popToTop();
   };
 }
 
