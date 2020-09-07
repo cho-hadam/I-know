@@ -14,7 +14,7 @@ const Word = (props) => {
   );
 };
 
-class IdeaScreen extends React.Component {
+class ListScreen extends React.Component {
   constructor(props) {
     super(props);
 
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IdeaScreen;
+export default ListScreen;
