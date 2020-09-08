@@ -16,7 +16,13 @@ const Word = (props) => {
 
 class ListScreen extends React.Component {
   render() {
-    const { listTitle, ideas, isHaveIdea, words } = this.props.route.params;
+    const {
+      listTitle,
+      ideas,
+      isHaveIdea,
+      words,
+      showDetail,
+    } = this.props.route.params;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
@@ -37,6 +43,7 @@ class ListScreen extends React.Component {
                   id={idea.id}
                   title={idea.title}
                   word={idea.word}
+                  showDetail={showDetail}
                 />
               ))
           ) : (

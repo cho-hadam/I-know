@@ -87,6 +87,7 @@ class HomeScreen extends React.Component {
                       listTitle: "아이디어",
                       ideas: ideas,
                       isHaveIdea: isHaveIdea,
+                      showDetail: this._showDetail,
                     })
                   }
                 >
@@ -170,6 +171,11 @@ class HomeScreen extends React.Component {
       AsyncStorage.setItem("ideas", JSON.stringify(newState.ideas));
       return { ...newState };
     });
+  };
+
+  _showDetail = (id) => {
+    const { navigation } = this.state;
+    navigation.push("Detail", { idea: this.state.ideas[id] });
   };
 }
 

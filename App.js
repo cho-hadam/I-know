@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./Components/Screens/HomeScreen";
 import WriteScreen from "./Components/Screens/WriteScreen";
 import ListScreen from "./Components/Screens/ListScreen";
+import DetailScreen from "./Components/Screens/DetailScreen";
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ class App extends React.Component {
             options={{ gestureEnabled: false }}
           />
           <Stack.Screen name="List" component={ListScreen} />
+          <Stack.Screen name="Detail" component={DetailScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     );
