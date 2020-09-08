@@ -147,6 +147,7 @@ class HomeScreen extends React.Component {
     this.setState({
       isOpeningMenu: true,
     });
+    console.log(this.state.ideas);
   };
 
   _closeMenu = (event) => {
@@ -158,14 +159,18 @@ class HomeScreen extends React.Component {
 
   _saveIdeas = (newIdeas) => {
     const { ideas } = this.state;
-    this.setState({
-      ideas: {
-        ...ideas,
-        ...newIdeas,
-      },
-      isHaveIdea: true,
+    this.setState(() => {
+      const newState = {
+        ideas: {
+          ...ideas,
+          ...newIdeas,
+        },
+        isHaveIdea: true,
+      };
+      console.log(newState.ideas);
+      AsyncStorage.setItem("ideas", JSON.stringify(newState.ideas));
+      return { ...newState };
     });
-    AsyncStorage.setItem("ideas", JSON.stringify(this.state.ideas));
   };
 }
 
