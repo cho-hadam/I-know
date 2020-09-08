@@ -142,16 +142,13 @@ class HomeScreen extends React.Component {
 
   _saveIdeas = (newIdeas) => {
     AsyncStorage.setItem("ideas", JSON.stringify(newIdeas));
-    this.setState((prevState) => {
-      const newState = {
-        ...prevState,
-        ideas: {
-          ...prevState.ideas,
-          ...newIdeas,
-        },
-      };
-      return { ...newState };
-    });
+    this.setState((prevState) => ({
+      ...prevState,
+      ideas: {
+        ...prevState.ideas,
+        ...newIdeas,
+      },
+    }));
   };
 }
 
