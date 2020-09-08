@@ -72,7 +72,6 @@ class HomeScreen extends React.Component {
                 <TouchableOpacity
                   onPress={() =>
                     navigation.push("Write", {
-                      ideas: ideas,
                       word: word,
                       saveIdeas: this._saveIdeas,
                     })
