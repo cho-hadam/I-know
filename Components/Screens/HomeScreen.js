@@ -167,7 +167,6 @@ class HomeScreen extends React.Component {
         },
         isHaveIdea: true,
       };
-      console.log(newState.ideas);
       AsyncStorage.setItem("ideas", JSON.stringify(newState.ideas));
       return { ...newState };
     });
