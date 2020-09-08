@@ -35,10 +35,19 @@ class ListScreen extends React.Component {
         </View>
         <ScrollView style={styles.content}>
           {listTitle == "단어"
-            ? words.reverse().map((word) => <Word word={word} />)
+            ? words
+                .reverse()
+                .map((word, index) => <Word key={index} word={word} />)
             : Object.values(ideas)
                 .reverse()
-                .map((idea) => <Idea key={idea.id} {...idea} />)}
+                .map((idea, index) => (
+                  <Idea
+                    key={index}
+                    id={idea.id}
+                    title={idea.title}
+                    word={idea.word}
+                  />
+                ))}
         </ScrollView>
       </SafeAreaView>
     );
