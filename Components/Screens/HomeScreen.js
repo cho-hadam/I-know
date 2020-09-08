@@ -24,8 +24,10 @@ class HomeScreen extends React.Component {
       fontsLoaded: false,
       ideasLoaded: false,
       isOpeningMenu: false,
+      isHaveIdea: false,
       word: "바이러스",
       ideas: {},
+      words: ["바이러스", "교과서", "프로그래밍"],
     };
   }
 
@@ -35,7 +37,14 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    const { navigation, isOpeningMenu, word, ideas } = this.state;
+    const {
+      navigation,
+      isOpeningMenu,
+      word,
+      ideas,
+      isHaveIdea,
+      words,
+    } = this.state;
 
     if (this.state.fontsLoaded && this.state.ideasLoaded) {
       return (
@@ -78,6 +87,7 @@ class HomeScreen extends React.Component {
                     navigation.push("List", {
                       listTitle: "아이디어",
                       ideas: ideas,
+                      isHaveIdea: isHaveIdea,
                     })
                   }
                 >
@@ -89,6 +99,7 @@ class HomeScreen extends React.Component {
                   onPress={() =>
                     navigation.push("List", {
                       listTitle: "단어",
+                      words: words,
                     })
                   }
                 >
@@ -121,6 +132,11 @@ class HomeScreen extends React.Component {
         ideasLoaded: true,
         ideas: parsedIdeas,
       });
+      if (this.state.ideas != null) {
+        this.setState({
+          isHaveIdea: true,
+        });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -149,6 +165,11 @@ class HomeScreen extends React.Component {
         ...newIdeas,
       },
     }));
+    if (this.state.ideas != null) {
+      this.setState({
+        isHaveIdea: true,
+      });
+    }
   };
 }
 

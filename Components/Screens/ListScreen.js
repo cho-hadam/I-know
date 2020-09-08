@@ -15,18 +15,8 @@ const Word = (props) => {
 };
 
 class ListScreen extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      navigation: props.navigation,
-      words: ["바이러스", "교과서", "프로그래밍"],
-    };
-  }
-
   render() {
-    const { navigation, words } = this.state;
-    const { listTitle, ideas } = this.props.route.params;
+    const { listTitle, ideas, isHaveIdea, words } = this.props.route.params;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
@@ -34,20 +24,24 @@ class ListScreen extends React.Component {
           <View style={styles.line} />
         </View>
         <ScrollView style={styles.content}>
-          {listTitle == "단어"
-            ? words
-                .reverse()
-                .map((word, index) => <Word key={index} word={word} />)
-            : Object.values(ideas)
-                .reverse()
-                .map((idea, index) => (
-                  <Idea
-                    key={index}
-                    id={idea.id}
-                    title={idea.title}
-                    word={idea.word}
-                  />
-                ))}
+          {listTitle == "단어" ? (
+            words
+              .reverse()
+              .map((word, index) => <Word key={index} word={word} />)
+          ) : isHaveIdea ? (
+            Object.values(ideas)
+              .reverse()
+              .map((idea, index) => (
+                <Idea
+                  key={index}
+                  id={idea.id}
+                  title={idea.title}
+                  word={idea.word}
+                />
+              ))
+          ) : (
+            <></>
+          )}
         </ScrollView>
       </SafeAreaView>
     );
