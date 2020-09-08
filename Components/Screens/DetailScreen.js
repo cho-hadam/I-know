@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 class DetailScreen extends React.Component {
@@ -51,10 +58,10 @@ class DetailScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.content}>
+        <ScrollView style={styles.content}>
           <Text style={[styles.text, { color: "#666" }]}># {idea.word}</Text>
           <Text style={[styles.text, { marginTop: 25 }]}>{idea.idea}</Text>
-        </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }
