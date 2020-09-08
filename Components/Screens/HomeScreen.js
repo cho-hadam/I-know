@@ -147,7 +147,6 @@ class HomeScreen extends React.Component {
     this.setState({
       isOpeningMenu: true,
     });
-    console.log(this.state.ideas);
   };
 
   _closeMenu = (event) => {
