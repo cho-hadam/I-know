@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { CommonActions } from "@react-navigation/native";
 
 class DetailScreen extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class DetailScreen extends React.Component {
 
   render() {
     const { navigation } = this.state;
-    const { idea } = this.props.route.params;
+    const { idea, saveIdeas } = this.props.route.params;
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -28,7 +29,19 @@ class DetailScreen extends React.Component {
           <TouchableOpacity
             onPress={(event) => {
               event.stopPropagation();
-              navigation.goBack();
+              navigation.dispatch(
+                CommonActions.reset({
+                  index: 1,
+                  routes: [
+                    {
+                      name: "Home",
+                      params: {
+                        isOpeningMenu: true,
+                      },
+                    },
+                  ],
+                })
+              );
             }}
           >
             <Image
@@ -42,7 +55,11 @@ class DetailScreen extends React.Component {
               style={{ marginRight: 15 }}
               onPress={(event) => {
                 event.stopPropagation();
-                navigation.push("Write", { idea: idea });
+                navigation.push("Write", {
+                  saveIdeas: saveIdeas,
+                  editIdea: idea,
+                  isEdit: true,
+                });
               }}
             >
               <Image

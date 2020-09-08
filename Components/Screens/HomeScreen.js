@@ -23,7 +23,7 @@ class HomeScreen extends React.Component {
       navigation: props.navigation,
       fontsLoaded: false,
       ideasLoaded: false,
-      isOpeningMenu: false,
+      isOpeningMenu: props.route.params,
       isHaveIdea: false,
       word: "바이러스",
       ideas: {},
@@ -176,6 +176,7 @@ class HomeScreen extends React.Component {
     const { navigation } = this.state;
     navigation.push("Detail", {
       idea: this.state.ideas[id],
+      saveIdeas: this._saveIdeas,
     });
   };
 }

@@ -11,6 +11,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { CommonActions } from "@react-navigation/native";
 
 class WriteScreen extends React.Component {
   constructor(props) {
@@ -20,12 +21,23 @@ class WriteScreen extends React.Component {
       navigation: props.navigation,
       title: "",
       idea: "",
+      isEdit: props.route.params,
     };
   }
 
+  componentDidMount() {
+    const { editIdea } = this.props.route.params;
+    if (this.state.isEdit) {
+      this.setState({
+        title: editIdea.title,
+        idea: editIdea.idea,
+      });
+    }
+  }
+
   render() {
-    const { navigation, title, idea } = this.state;
-    const { word } = this.props.route.params;
+    const { navigation, title, idea, isEdit } = this.state;
+    const { word, editIdea } = this.props.route.params;
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -38,7 +50,11 @@ class WriteScreen extends React.Component {
             <TouchableOpacity onPress={this._cancelWrite}>
               <Text style={[styles.text, { color: "#999" }]}>취소</Text>
             </TouchableOpacity>
-            <Text style={styles.text}>{word}</Text>
+            {isEdit ? (
+              <Text style={styles.text}>{editIdea.word}</Text>
+            ) : (
+              <Text style={styles.text}>{word}</Text>
+            )}
             <TouchableOpacity onPress={this._completeWrite}>
               <Text style={[styles.text, { color: "#666" }]}>완료</Text>
             </TouchableOpacity>
@@ -73,8 +89,14 @@ class WriteScreen extends React.Component {
   }
 
   _cancelWrite = () => {
-    const { navigation } = this.state;
-    Alert.alert("취소", "정말 글쓰기를 취소하시겠습니까?", [
+    const { navigation, isEdit } = this.state;
+    let msg;
+    if (isEdit) {
+      msg = "수정을 취소하시겠습니까?";
+    } else {
+      msg = "정말 글쓰기를 취소하시겠습니까?";
+    }
+    Alert.alert("취소", msg, [
       {
         text: "Cancel",
         onPress: () => {},
@@ -100,19 +122,48 @@ class WriteScreen extends React.Component {
   };
 
   _completeWrite = () => {
-    const { saveIdeas, word } = this.props.route.params;
-    const { navigation } = this.state;
-    const ID = Date.now();
-    const newIdeas = {
+    const { saveIdeas, word, editIdea } = this.props.route.params;
+    const { navigation, isEdit } = this.state;
+
+    let ID, realWord;
+    if (isEdit) {
+      ID = editIdea.id;
+      realWord = editIdea.word;
+    } else {
+      ID = Date.now();
+      realWord = word;
+    }
+    const editedIdea = {
+      id: ID,
+      title: this.state.title,
+      idea: this.state.idea,
+      word: realWord,
+    };
+    const newIdea = {
       [ID]: {
-        id: ID,
-        title: this.state.title,
-        idea: this.state.idea,
-        word: word,
+        ...editedIdea,
       },
     };
-    saveIdeas(newIdeas);
-    navigation.popToTop();
+    saveIdeas(newIdea);
+
+    if (isEdit) {
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [
+            {
+              name: "Detail",
+              params: {
+                idea: editedIdea,
+                saveIdeas: saveIdeas,
+              },
+            },
+          ],
+        })
+      );
+    } else {
+      navigation.popToTop();
+    }
   };
 }
 
