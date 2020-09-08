@@ -25,7 +25,6 @@ class HomeScreen extends React.Component {
       ideasLoaded: false,
       isOpeningMenu: props.route.params,
       isHaveIdea: false,
-      word: "바이러스",
       ideas: {},
       words: ["바이러스", "교과서", "프로그래밍"],
     };
@@ -37,14 +36,7 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    const {
-      navigation,
-      isOpeningMenu,
-      word,
-      ideas,
-      isHaveIdea,
-      words,
-    } = this.state;
+    const { navigation, isOpeningMenu, ideas, isHaveIdea, words } = this.state;
 
     if (this.state.fontsLoaded && this.state.ideasLoaded) {
       return (
@@ -72,7 +64,7 @@ class HomeScreen extends React.Component {
                 <TouchableOpacity
                   onPress={() =>
                     navigation.push("Write", {
-                      word: word,
+                      word: words[0],
                       isEdit: false,
                       saveIdeas: this._saveIdeas,
                     })
@@ -108,7 +100,7 @@ class HomeScreen extends React.Component {
                 </TouchableOpacity>
               </>
             ) : (
-              <Text style={styles.textWord}>{word}</Text>
+              <Text style={styles.textWord}>{words[0]}</Text>
             )}
           </View>
         </SafeAreaView>

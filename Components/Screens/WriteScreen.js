@@ -21,7 +21,7 @@ class WriteScreen extends React.Component {
       navigation: props.navigation,
       title: "",
       idea: "",
-      isEdit: props.route.params,
+      isEdit: props.route.params.isEdit,
     };
   }
 
