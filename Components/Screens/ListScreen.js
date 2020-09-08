@@ -21,13 +21,12 @@ class ListScreen extends React.Component {
     this.state = {
       navigation: props.navigation,
       words: ["바이러스", "교과서", "프로그래밍"],
-      ideas: props.route.params.ideas,
     };
   }
 
   render() {
-    const { navigation, words, ideas } = this.state;
-    const { listTitle } = this.props.route.params;
+    const { navigation, words } = this.state;
+    const { listTitle, ideas } = this.props.route.params;
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
