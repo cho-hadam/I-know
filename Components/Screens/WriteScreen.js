@@ -113,17 +113,7 @@ class WriteScreen extends React.Component {
         word: word,
       },
     };
-    this.setState((prevState) => {
-      const newState = {
-        ...prevState,
-        ideas: {
-          ...prevState.ideas,
-          ...newIdeas,
-        },
-      };
-      saveIdeas(newState.ideas);
-      return { ...newState };
-    });
+    saveIdeas(newIdeas);
     navigation.popToTop();
   };
 }
