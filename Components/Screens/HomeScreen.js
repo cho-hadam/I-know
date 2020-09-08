@@ -173,7 +173,9 @@ class HomeScreen extends React.Component {
 
   _showDetail = (id) => {
     const { navigation } = this.state;
-    navigation.push("Detail", { idea: this.state.ideas[id] });
+    navigation.push("Detail", {
+      idea: this.state.ideas[id],
+    });
   };
 }
 
