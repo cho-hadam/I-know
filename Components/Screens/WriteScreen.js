@@ -11,7 +11,6 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { CommonActions } from "@react-navigation/native";
 
 class WriteScreen extends React.Component {
   constructor(props) {
@@ -147,20 +146,7 @@ class WriteScreen extends React.Component {
     saveIdeas(newIdea);
 
     if (isEdit) {
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 1,
-          routes: [
-            {
-              name: "Detail",
-              params: {
-                idea: editedIdea,
-                saveIdeas: saveIdeas,
-              },
-            },
-          ],
-        })
-      );
+      navigation.pop(3);
     } else {
       navigation.popToTop();
     }
