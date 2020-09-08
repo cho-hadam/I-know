@@ -73,6 +73,7 @@ class HomeScreen extends React.Component {
                   onPress={() =>
                     navigation.push("Write", {
                       word: word,
+                      isEdit: false,
                       saveIdeas: this._saveIdeas,
                     })
                   }
@@ -156,13 +157,13 @@ class HomeScreen extends React.Component {
     });
   };
 
-  _saveIdeas = (newIdeas) => {
+  _saveIdeas = (newIdea) => {
     const { ideas } = this.state;
     this.setState(() => {
       const newState = {
         ideas: {
           ...ideas,
-          ...newIdeas,
+          ...newIdea,
         },
         isHaveIdea: true,
       };
