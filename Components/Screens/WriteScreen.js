@@ -8,10 +8,9 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   Alert,
-  AsyncStorage,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 class WriteScreen extends React.Component {
   constructor(props) {
