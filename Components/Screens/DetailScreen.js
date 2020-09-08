@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Alert,
 } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { CommonActions } from "@react-navigation/native";
@@ -21,7 +22,7 @@ class DetailScreen extends React.Component {
 
   render() {
     const { navigation } = this.state;
-    const { idea, saveIdeas } = this.props.route.params;
+    const { idea, saveIdeas, deleteIdea } = this.props.route.params;
 
     return (
       <SafeAreaView style={{ flex: 1 }}>
@@ -67,7 +68,24 @@ class DetailScreen extends React.Component {
                 source={require("../../assets/icon/edit.png")}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={this._deleteIdea}>
+            <TouchableOpacity
+              onPress={() => {
+                Alert.alert("취소", "정말 아이디어를 삭제하시겠습니까?", [
+                  {
+                    text: "Cancel",
+                    onPress: () => {},
+                    style: "cancel",
+                  },
+                  {
+                    text: "OK",
+                    onPress: () => {
+                      deleteIdea(idea.id);
+                      navigation.pop(2);
+                    },
+                  },
+                ]);
+              }}
+            >
               <Image
                 style={styles.btnMenu}
                 source={require("../../assets/icon/delete.png")}

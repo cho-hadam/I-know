@@ -167,9 +167,28 @@ class HomeScreen extends React.Component {
         },
         isHaveIdea: true,
       };
-      AsyncStorage.setItem("ideas", JSON.stringify(newState.ideas));
+      this._saveStorage(newState.ideas);
       return { ...newState };
     });
+  };
+
+  _deleteIdea = (id) => {
+    const { ideas } = this.state;
+    delete ideas[id];
+    this.setState(() => {
+      const newState = {
+        ideas: {
+          ...ideas,
+        },
+        isHaveIdea: true,
+      };
+      this._saveStorage(newState.ideas);
+      return { ...newState };
+    });
+  };
+
+  _saveStorage = (ideas) => {
+    AsyncStorage.setItem("ideas", JSON.stringify(ideas));
   };
 
   _showDetail = (id) => {
@@ -177,6 +196,7 @@ class HomeScreen extends React.Component {
     navigation.push("Detail", {
       idea: this.state.ideas[id],
       saveIdeas: this._saveIdeas,
+      deleteIdea: this._deleteIdea,
     });
   };
 }
