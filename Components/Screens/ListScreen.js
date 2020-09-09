@@ -31,9 +31,7 @@ class ListScreen extends React.Component {
         </View>
         <ScrollView style={styles.content}>
           {listTitle == "단어" ? (
-            words
-              .reverse()
-              .map((word, index) => <Word key={index} word={word} />)
+            words.map((word, index) => <Word key={index} word={word} />)
           ) : isHaveIdea ? (
             Object.values(ideas)
               .reverse()
