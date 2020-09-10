@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "IKnow",
-    "slug": "IKnow",
+    "name": "I Know",
+    "slug": "I-know",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f3f3f3"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,6 +21,9 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "co.hadam.iknow"
     }
   }
 }
