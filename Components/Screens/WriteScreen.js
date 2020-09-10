@@ -124,31 +124,35 @@ class WriteScreen extends React.Component {
     const { saveIdeas, word, editIdea } = this.props.route.params;
     const { navigation, isEdit } = this.state;
 
-    let ID, realWord;
-    if (isEdit) {
-      ID = editIdea.id;
-      realWord = editIdea.word;
+    if (this.state.title == "") {
+      Alert.alert("제목을 입력하세요.", "제목은 필수 입력 사항입니다.");
     } else {
-      ID = Date.now();
-      realWord = word;
-    }
-    const editedIdea = {
-      id: ID,
-      title: this.state.title,
-      idea: this.state.idea,
-      word: realWord,
-    };
-    const newIdea = {
-      [ID]: {
-        ...editedIdea,
-      },
-    };
-    saveIdeas(newIdea);
+      let ID, realWord;
+      if (isEdit) {
+        ID = editIdea.id;
+        realWord = editIdea.word;
+      } else {
+        ID = Date.now();
+        realWord = word;
+      }
+      const editedIdea = {
+        id: ID,
+        title: this.state.title,
+        idea: this.state.idea,
+        word: realWord,
+      };
+      const newIdea = {
+        [ID]: {
+          ...editedIdea,
+        },
+      };
+      saveIdeas(newIdea);
 
-    if (isEdit) {
-      navigation.pop(3);
-    } else {
-      navigation.popToTop();
+      if (isEdit) {
+        navigation.pop(3);
+      } else {
+        navigation.popToTop();
+      }
     }
   };
 }
