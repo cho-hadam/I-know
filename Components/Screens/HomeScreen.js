@@ -10,6 +10,7 @@ import {
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import wordsData from "../../data/word_data.json";
 
 let customFonts = {
   "Noto-Serif-KR": require("../../assets/fonts/NotoSerifKR-Regular.otf"),
@@ -20,25 +21,32 @@ class HomeScreen extends React.Component {
     super(props);
 
     this.state = {
+      date: "",
       navigation: props.navigation,
       fontsLoaded: false,
       ideasLoaded: false,
+      wordLoaded: false,
       isOpeningMenu: props.route.params,
       isHaveIdea: false,
       ideas: {},
-      words: ["바이러스", "교과서", "프로그래밍"],
+      words: [],
     };
   }
 
   componentDidMount() {
     this._loadFontsAsync();
     this._loadIdeas();
+    this._loadWord();
   }
 
   render() {
     const { navigation, isOpeningMenu, ideas, isHaveIdea, words } = this.state;
 
-    if (this.state.fontsLoaded && this.state.ideasLoaded) {
+    if (
+      this.state.fontsLoaded &&
+      this.state.ideasLoaded &&
+      this.state.wordLoaded
+    ) {
       return (
         <SafeAreaView style={styles.container}>
           <View style={styles.header}>
@@ -133,6 +141,55 @@ class HomeScreen extends React.Component {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  async _loadWord() {
+    const { date, words } = this.state;
+
+    const today = new Date();
+    const currentDate = today.toISOString().substring(0, 10); // yyyy-mm-dd
+
+    const rndNum = Math.floor(Math.random() * wordsData.length);
+
+    if (date == "") {
+      const dbDate = await AsyncStorage.getItem("date");
+      const dbWords = await AsyncStorage.getItem("words");
+      const parsedDate = JSON.parse(dbDate);
+      const parsedWords = JSON.parse(dbWords);
+
+      if (parsedWords == null) {
+        this.setState({
+          date: currentDate,
+          word: wordsData[rndNum],
+          words: [wordsData[rndNum]],
+        });
+      } else if (parsedDate != currentDate) {
+        this.setState({
+          date: currentDate,
+          word: wordsData[rndNum],
+          words: [wordsData[rndNum], ...parsedWords],
+        });
+      } else {
+        this.setState({
+          date: currentDate,
+          word: parsedWords[0],
+          words: parsedWords,
+        });
+      }
+    } else if (date != currentDate) {
+      this.setState({
+        date: currentDate,
+        word: wordsData[rndNum],
+        words: [wordsData[rndNum], ...words],
+      });
+    }
+
+    AsyncStorage.setItem("date", JSON.stringify(this.state.date));
+    AsyncStorage.setItem("words", JSON.stringify(this.state.words));
+
+    this.setState({
+      wordLoaded: true,
+    });
   }
 
   _openMenu = (event) => {
