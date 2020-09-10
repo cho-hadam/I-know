@@ -73,7 +73,7 @@ class WriteScreen extends React.Component {
             </View>
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
               <TextInput
-                style={[styles.text, { marginTop: 35, paddingBottom: 20 }]}
+                style={[styles.text, styles.inputIdea]}
                 value={idea}
                 onChangeText={this._controlInputIdea}
                 multiline={true}
@@ -185,6 +185,12 @@ const styles = StyleSheet.create({
   input: {
     marginLeft: 10,
     width: 333,
+  },
+  inputIdea: {
+    flex: 1,
+    marginTop: 35,
+    paddingBottom: 20,
+    textAlignVertical: "top",
   },
 });
 
