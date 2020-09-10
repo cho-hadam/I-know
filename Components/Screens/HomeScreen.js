@@ -151,6 +151,7 @@ class HomeScreen extends React.Component {
 
     const rndNum = Math.floor(Math.random() * wordsData.length);
 
+    let newSWord, newSWords;
     if (date == "") {
       const dbDate = await AsyncStorage.getItem("date");
       const dbWords = await AsyncStorage.getItem("words");
@@ -158,31 +159,25 @@ class HomeScreen extends React.Component {
       const parsedWords = JSON.parse(dbWords);
 
       if (parsedWords == null) {
-        this.setState({
-          date: currentDate,
-          word: wordsData[rndNum],
-          words: [wordsData[rndNum]],
-        });
+        newSWord = wordsData[rndNum];
+        newSWords = [wordsData[rndNum]];
       } else if (parsedDate != currentDate) {
-        this.setState({
-          date: currentDate,
-          word: wordsData[rndNum],
-          words: [wordsData[rndNum], ...parsedWords],
-        });
+        newSWord = wordsData[rndNum];
+        newSWords = [wordsData[rndNum], ...parsedWords];
       } else {
-        this.setState({
-          date: currentDate,
-          word: parsedWords[0],
-          words: parsedWords,
-        });
+        newSWord = parsedWords[0];
+        newSWords = parsedWords;
       }
     } else if (date != currentDate) {
-      this.setState({
-        date: currentDate,
-        word: wordsData[rndNum],
-        words: [wordsData[rndNum], ...words],
-      });
+      newSWord = wordsData[rndNum];
+      newSWords = [wordsData[rndNum], ...words];
     }
+
+    this.setState({
+      date: currentDate,
+      word: newSWord,
+      words: newSWords,
+    });
 
     AsyncStorage.setItem("date", JSON.stringify(this.state.date));
     AsyncStorage.setItem("words", JSON.stringify(this.state.words));
