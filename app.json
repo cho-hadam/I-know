@@ -24,6 +24,8 @@
     },
     "android": {
       "package": "co.hadam.iknow"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/cho-hadam/I-know"
   }
 }
