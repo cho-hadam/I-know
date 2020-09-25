@@ -2,10 +2,6 @@ import os
 import csv
 import json
 
-current_path = os.path.dirname(os.path.realpath(__file__))
-print(current_path)
-os.chdir(current_path)
-
 with open('./word_data.csv', 'r', encoding='utf-8') as file:
     lines_list = csv.reader(file)
 
@@ -17,6 +13,7 @@ with open('./word_data.csv', 'r', encoding='utf-8') as file:
         words_set.add(line[0])
 
     words_list = list(words_set)
+    print(words_list)
 
 with open('./word_data.json', 'w', encoding='utf-8') as out_file:
     words_json = json.dumps(words_list, indent=2, ensure_ascii=False)
