@@ -25,10 +25,9 @@
       "supportsTablet": true
     },
     "android": {
-      "versionCode": 2,
+      "versionCode": 3,
       "package": "co.hadam.iknow",
-      "icon":"./assets/icon.png",
-      "permissions": ["CAMERA", "RECORD_AUDIO", "READ_PHONE_STATE", "READ_CONTACTS"]
+      "icon":"./assets/icon.png"
     },
     "description": "",
     "githubUrl": "https://github.com/cho-hadam/I-know"
