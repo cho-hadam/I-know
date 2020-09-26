@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "I Know",
-    "slug": "I-know",
+    "slug": "Iknow",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,14 +16,19 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "ios": {
+      "bundleIdentifier": "co.hadam.iknow",
+      "icon":"./assets/icon.png",
+      "supportsTablet": true
+    },
     "android": {
-      "package": "co.hadam.iknow"
+      "versionCode": 2,
+      "package": "co.hadam.iknow",
+      "icon":"./assets/icon.png",
+      "permissions": ["CAMERA", "RECORD_AUDIO", "READ_PHONE_STATE", "READ_CONTACTS"]
     },
     "description": "",
     "githubUrl": "https://github.com/cho-hadam/I-know"
